@@ -16,11 +16,5 @@ angular.
       .otherwise({
           redirectTo: '/resgateInvestimento'
       })
-      .when('/resgatePersonalizado', {
-        templateUrl: 'spas/resgateInvestimento/resgatePersonalizado.html'
-      })
-      .otherwise({
-          redirectTo: '/resgatePersonalizado'
-      })
     }
   ]);

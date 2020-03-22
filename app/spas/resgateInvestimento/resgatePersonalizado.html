@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt" ng-app="resgateInvestimentoApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Resgate Investimento</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/angular-resource/angular-resource.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="lib/angular-ui-bootstrap/src/modal/modal.js"></script>
+    <script src="spas/resgateInvestimento/resgateInvestimento-app.js"></script>
+    <script src="spas/resgateInvestimento/resgateInvestimento-controllers.js"></script>
+    <script src="spas/resgateInvestimento/resgateInvestimento-services.js"></script>
+    <!--  <script src="spas/resgateInvestimento/"></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <header>
+        <div class="jumbotron">
+          <h2>RESGATE</h2>
+        </div>
+        <fieldset>
+          <span ng-if="vm.erroSaldoAcumulado" class="alert alert-danger"> Valor a resgatar não pode ser maior que saldo acumulado!</span> 
+          <span ng-if="vm.erroTotalDisponivel" class="alert alert-danger"> Valor a resgatar não pode ser maior que o valor total disponível!</span>
+          <span ng-if="vm.erroPreencherValores" class="alert alert-danger"> Preencha os campos com os valores que deseja resgatar.</span>
+        </fieldset>
+
+        
+      </header>
+    </div>
+
+    <div>
+      <h3>DADOS DO INVESTIMENTO</h3>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div style="display: inline;" class="col-lg-4">
+              <fieldset>
+                <legend>Nome</legend>
+                <label>{{vm.dadosInvestimento.nome}}</label>
+              </fieldset>
+            </div>
+            <div style="display: inline;" class="col-lg-4">
+              <fieldset>
+                <legend>Saldo Total Disponível</legend>
+                <label>R$ {{vm.dadosInvestimento.saldoTotalDisponivel | number: 2}}</label>
+              </fieldset>
+            </div>
+            <div style="display: inline;" class="col-lg-4">
+              <fieldset>
+                <legend>Valor Total a Resgatar</legend>
+                <label>R$ {{vm.totalResgate | number: 2}}</label>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3>RESGATE DO SEU JEITO</h3>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="co4">Ação</th>
+                <th scope="co4">Saldo Acumulado</th>
+                <th scope="co4">Valor a Resgatar</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="item in vm.dadosInvestimento.acoes">
+                <td style="text-align:left; font-size:small;">
+                  {{item.nome}}</td>
+                <td style="text-align:left; font-size:small;">
+                R$  {{item.saldoAcumulado | number: '2' }}</td>
+                <td style="text-align:left; font-size:small;">
+                  <input ng-blur="vm.verificaResgate(item.resgate, item.saldoAcumulado)" style="text-align:left; font-size:small;"
+                  ng-model="item.resgate"/>
+                </td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+        
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">RESGATE EFETUADO COM SUCESSO!</h4>
+          </div>
+          
+          <!-- Modal body -->
+          <div class="modal-body">
+            O valor solicitado estará em sua conta em até 5 dias úteis.
+          </div>
+          
+          <!-- Modal footer -->
+          <div align="center">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">NOVO RESGATE</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <!--  -->
+    <div align="right">
+      <button type="button" ng-click="vm.voltar()" class="btn btn-danger">Cancelar</button>
+      <button type="button" ng-click="vm.confirmarResgate()" data-toggle="{{vm.mostraModal}}" data-target="#myModal" class="btn btn-primary">Confirmar Resgate</button>
+    </div>
+  </body>
+</html>

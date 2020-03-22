@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt" ng-app="resgateInvestimentoApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Resgate Investimento</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/angular-resource/angular-resource.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="lib/angular-ui-bootstrap/src/modal/modal.js"></script>
+    <script src="spas/resgateInvestimento/resgateInvestimento-app.js"></script>
+    <script src="spas/resgateInvestimento/resgateInvestimento-controllers.js"></script>
+    <script src="spas/resgateInvestimento/resgateInvestimento-services.js"></script>
+    <!--  <script src="spas/resgateInvestimento/"></script> -->
+  </head>
+  <body ng-controller="ResgateInvestimentoController as vm">
+    <div>
+      <header>
+        <div class="jumbotron">
+          <h2>INVESTIMENTOS</h2>
+        </div>
+      </header>
+    </div>
+    
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="co4">Nome</th>
+            <th scope="co4">Objetivo</th>
+            <th scope="co4">Saldo Total Disponível</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-ng-repeat="item in vm.listaInvestimentos" ng-disabled="item.indicadorCarencia === 'S'" ng-click="vm.resgatePersonalizado(item);">
+            <td style="text-align:left; font-size:small;">
+              {{item.nome}}</td>
+            <td style="text-align:left; font-size:small;">
+              {{item.objetivo}}</td>
+            <td style="text-align:left; font-size:small;">
+              R$ {{item.saldoTotalDisponivel | number: '2'}}</td>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

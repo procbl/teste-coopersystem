@@ -52,9 +52,9 @@
 		
 		
 		function confirmarResgate(){
+			vm.mostraModal = "";
 			if(!vm.erroSaldoAcumulado){
 				vm.erroTotalDisponivel = false;
-				vm.mostraModal = "";
 				if(vm.totalResgate > vm.dadosInvestimento.saldoTotalDisponivel){
 					vm.erroTotalDisponivel = true;
 				} else if(vm.totalResgate <= 0){

@@ -53,15 +53,13 @@
 		
 		function confirmarResgate(){
 			vm.mostraModal = "";
-			if(!vm.erroSaldoAcumulado){
-				vm.erroTotalDisponivel = false;
-				if(vm.totalResgate > vm.dadosInvestimento.saldoTotalDisponivel){
-					vm.erroTotalDisponivel = true;
-				} else if(vm.totalResgate <= 0){
-					vm.erroPreencherValores = true;
-				} else {
-					vm.mostraModal = "modal";
-				}
+			vm.erroTotalDisponivel = false;
+			if(vm.totalResgate > vm.dadosInvestimento.saldoTotalDisponivel){
+				vm.erroTotalDisponivel = true;
+			} else if(vm.totalResgate <= 0){
+				vm.erroPreencherValores = true;
+			} else if(!vm.erroSaldoAcumulado){
+				vm.mostraModal = "modal";
 			}
 		};
 		

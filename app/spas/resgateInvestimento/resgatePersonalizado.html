@@ -82,7 +82,7 @@
                 R$  {{item.saldoAcumulado | number: '2' }}</td>
                 <td style="text-align:left; font-size:small;">
                   <input ng-blur="vm.verificaResgate(item.resgate, item.saldoAcumulado)" style="text-align:left; font-size:small;"
-                  ng-model="item.resgate"/>
+                  ng-model="item.resgate" value="0,00" />
                 </td>
             </tbody>
           </table>

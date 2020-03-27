@@ -38,6 +38,7 @@
 				vm.dadosInvestimento = investimento;
 				angular.forEach(vm.dadosInvestimento.acoes, function(item){
 					item.saldoAcumulado = (vm.dadosInvestimento.saldoTotalDisponivel * item.percentual)/100;
+					item.resgate = "0,00"
 				});
 				vm.erroTotalDisponivel = false;
 				vm.erroSaldoAcumulado = false;
@@ -51,14 +52,16 @@
 		
 		
 		function confirmarResgate(){
-			vm.erroTotalDisponivel = false;
-			vm.mostraModal = "";
-			if(vm.totalResgate > vm.dadosInvestimento.saldoTotalDisponivel){
-				vm.erroTotalDisponivel = true;
-			} else if(vm.totalResgate <= 0){
-				vm.erroPreencherValores = true;
-			} else {
-				vm.mostraModal = "modal";
+			if(!vm.erroSaldoAcumulado){
+				vm.erroTotalDisponivel = false;
+				vm.mostraModal = "";
+				if(vm.totalResgate > vm.dadosInvestimento.saldoTotalDisponivel){
+					vm.erroTotalDisponivel = true;
+				} else if(vm.totalResgate <= 0){
+					vm.erroPreencherValores = true;
+				} else {
+					vm.mostraModal = "modal";
+				}
 			}
 		};
 		
@@ -83,6 +86,9 @@
 			} else {
 				vm.totalResgate = 0;
 				angular.forEach(vm.dadosInvestimento.acoes, function(item){
+					if(item.saldoAcumulado < item.resgate){
+						vm.erroSaldoAcumulado = true;
+					}
 					vm.totalResgate = vm.totalResgate + Number(item.resgate.replace('.','').replace('.','').replace('.','').replace(',','.'));
 				});
 			}
